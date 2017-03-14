@@ -1,0 +1,153 @@
+<html>
+<head>
+
+<title>Calculadora de JMCH</title>
+<meta charset="utf-8">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+
+<script type="text/javascript">
+
+// Declaración de variables globales cambios 1
+
+var num; var acc= 0; var op= ""; var a = new Date(); var msj; 
+
+// Saludo 
+function New_date() { 
+  
+
+            if (a.getHours() < 6 ) { msj= "Buenas noches";}
+             else if (a.getHours() < 12) {msj= "Buenos días";}
+               else if (a.getHours() < 18) {msj= "Buenas tardes";}
+               else {msj = "Buenas noches";}
+    
+        $("#saludo").html(msj + ", bienvenido a la calculadora de Juan Manuel Ch, la fecha es: "); 
+        $("#fecha").html(new Date())
+}
+
+$(function(){ 
+      // Define evento periodico, ocurre
+      // cada segundo (1000 miliseg)
+    setInterval(New_date, 1000); 
+
+           // muestra fecha al cargar
+    New_date();
+  });
+
+
+// Vaciar pantalla con click
+ $(function() {   $("#n1").on("click", function (){ $("#n1").val("");}
+    )});
+
+//Primera parte
+
+
+$(function() {
+$("#cuadrado").on("click", function() {
+  var num = $("#n1");
+  num.val(num.val() * num.val());
+}); 
+
+$("#inverso").on("click", function() {var num = $("#n1");
+  num.val(1/num.val());
+}); 
+
+$("#raiz").on ("click", function(){
+  var num = $("#n1");
+  num.val(Math.sqrt(num.val()));
+}); 
+
+ $("#parte_entera").on("click", function(){
+    var num = $("#n1");
+  if (num.val() > 0) {num.val(Math.floor(num.val()))}
+    if  (num.val() < 0) {num.val(-Math.ceil(num.val()))}
+
+  });
+
+$("#potencia").on("click", function() {
+  var num = $("#n1");
+  num.val(Math.pow(+"2",+num.val()));
+});
+
+ 
+$("#factorial").on("click", function(){
+  var num= $("#n1");
+  for (var i = num.val()- 1; i > 0; i--) 
+  {num.val(num.val()*i)}
+}); 
+
+});
+ 
+
+// segunda parte 
+
+$(function(){ var num= $("#n1"); 
+ $("#suma").on("click",function()   { acc = num.val();  op = "+"});
+ $("#resta").on("click",function() { acc = num.val();  op = "-" });
+  $("#division").on("click",function() { acc = num.val();  op = "/" });
+  $("#multiplicacion").on("click",function() { acc = num.val();  op = "*" });
+  $("#xalay").on("click",function() {acc = num.val(); op= "Math.pow()"}); 
+  
+
+  $("#calcular").on("click", function(){ var num= $("#n1");
+
+
+    if (op === "+") {num.val(+acc + +num.val())}
+    if (op === "-") {num.val(+acc - +num.val())}
+    if (op === "/") {num.val(+acc / +num.val())}
+    if (op === "*") {num.val(+acc * +num.val())}
+    if (op === "Math.pow()") {num.val(Math.pow(+acc, +num.val()))}
+  });
+});
+// Tercera parte
+
+
+$(function() {
+  $("#sumatorio").on("click",
+  function() {var num=$("#n1"), lista=num.val().split(",");
+  for (var i=0, acc=0; i<lista.length; i++) {acc+= +lista[i]; num.val(acc);}
+});
+   $("#producto").on("click",
+  function() {var num=$("#n1"), lista=num.val().split(",");
+  for (var i=0, acc=1; i<lista.length; i++) {acc*= +lista[i]; num.val(acc);}
+});
+});
+
+</script>
+</head>
+
+<!-- Inicio de código HTML -->
+<body ><center> 
+<div id="mmm"><h1 id="saludo"></h1><h1 id="fecha"></h1>
+</div>
+
+ <div id= "caja_total">
+ <div id="ans"> 
+ Número:<p><input type="text" size="24" id="n1"><p>
+ </div>
+ 
+  <p>Operaciones unitarias(con un solo operando)</p>
+  <button id="cuadrado">x<sup>2</sup></button>
+  <button id="inverso">1/x</button>
+  <button id="raiz">&#8730;(x)</button>
+  <button id="parte_entera">Parte_entera(x)</button>
+  <button id="potencia">2<sup>n</sup></button>
+  <button id="factorial">n!</button>
+  
+  <p> Operaciones binarias(con dos operandos)</p>
+  <button id="suma">+</button>
+  <button id="resta">-</button>
+  <button id="division">/</button>
+  <button id="multiplicacion">*</button>
+  <button id="xalay">x<sup>y</sup></button>
+  <button id="calcular">=</button>
+
+<p>Operaciones con n operandos introducidos en formato CSV</p>
+<button id="sumatorio">Σ(x)</button>
+<button id="producto">producto(x)</button>
+
+
+</div>
+</center>
+</body>
+</html>
